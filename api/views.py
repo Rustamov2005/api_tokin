@@ -1,6 +1,6 @@
 from crypt import methods
 from os import access
-from django.contrib.admin import action
+from rest_framework.decorators import action
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework import viewsets
@@ -71,7 +71,7 @@ class SongsAlbumViewSetWeb(viewsets.ModelViewSet):
         song = self.get_object()
         song.listen += 1
         song.save()
-
+        return Response(data=song.listen)
 
 class TokenCkeck(APIView):
     def get(self, request):

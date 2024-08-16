@@ -1,3 +1,6 @@
+from crypt import methods
+from os import access
+from django.contrib.admin import action
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework import viewsets
@@ -5,6 +8,7 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from .models import Artist, Album, Song, SongsAlbum
 from .serializers import AlbumSerializerWeb, ArtistSerializerWeb, SongSerializerWeb, ArtistSerializerTelegram, SongSerializerTelegram, SongsAlbumSerializerWeb, AlbumSerializerTelegram
 from rest_framework.authentication import TokenAuthentication
+from rest_framework.views import APIView
 
 
 class ArtistViewSetWeb(viewsets.ModelViewSet):
@@ -61,3 +65,17 @@ class SongsAlbumViewSetWeb(viewsets.ModelViewSet):
     authentication_classes = [TokenAuthentication]
     def get_queryset(self):
         return SongsAlbum.objects.all()
+
+    @action(detail=True, methods=["GET", ])
+    def listen(self, request, *args, **kwargs):
+        song = self.get_object()
+        song.listen += 1
+        song.save()
+
+
+class TokenCkeck(APIView):
+    def get(self, request):
+        from rest_framework.authtoken.models import Token
+
+        token = Token.objects.create(username="user1", password="otabek123")
+        print(token.key)

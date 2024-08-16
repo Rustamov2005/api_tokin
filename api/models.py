@@ -6,6 +6,7 @@ class Artist(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     image = models.URLField()
+    seen = models.PositiveBigIntegerField(default=0)
     nic_name = models.CharField(max_length=50)
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -20,6 +21,7 @@ class Album(models.Model):
     title = models.CharField(max_length=50)
     image = models.ImageField(upload_to=SaveMediaFiles.save_album_image)
     description = models.TextField()
+    seen = models.PositiveBigIntegerField(default=0)
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -31,6 +33,7 @@ class Song(models.Model):
     title = models.CharField(max_length=50)
     image = models.ImageField(upload_to=SaveMediaFiles.save_song_image)
     description = models.TextField()
+    listen = models.PositiveBigIntegerField(default=0)
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
 
 

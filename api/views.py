@@ -48,14 +48,14 @@ class ArtistViewSetWeb(viewsets.ModelViewSet):
 
     @action(detail=False, methods=["GET", ])
     def to_draft(self, request, *args, **kwargs):
-        artists = self.get_queryset()
+        artists = Artist.objects.all()
         for artist in artists:
             artist.pb_to_df()
         return Response(data={"message": "All music draffed"})
 
     @action(detail=False, methods=["GET", ])
     def to_publish(self, request, *args, **kwargs):
-        artists = self.get_queryset()
+        artists = Artist.objects.all()
         for artist in artists:
             artist.df_to_pb()
         return Response(data={"message": "All music published"})
@@ -97,14 +97,14 @@ class ArtistViewSetTelegram(viewsets.ModelViewSet):
 
     @action(detail=False, methods=["GET", ])
     def to_draft(self, request, *args, **kwargs):
-        artists = self.get_queryset()
+        artists = Artist.objects.all()
         for artist in artists:
             artist.pb_to_df()
         return Response(data={"message": "All music draffed"})
 
     @action(detail=False, methods=["GET", ])
     def to_publish(self, request, *args, **kwargs):
-        artists = self.get_queryset()
+        artists = Artist.objects.all()
         for artist in artists:
             artist.df_to_pb()
         return Response(data={"message": "All music published"})
@@ -146,14 +146,14 @@ class AlbumViewSetWeb(viewsets.ModelViewSet):
 
     @action(detail=False, methods=["GET", ])
     def to_draft(self, request, *args, **kwargs):
-        albums = self.get_queryset()
+        albums = Album.objects.all()
         for album in albums:
             album.pb_to_df()
         return Response(data={"message": "All music draffed"})
 
     @action(detail=False, methods=["GET", ])
     def to_publish(self, request, *args, **kwargs):
-        albums = self.get_queryset()
+        albums = Album.objects.all()
         for album in albums:
             album.df_to_pb()
         return Response(data={"message": "All music published"})
@@ -195,14 +195,14 @@ class AlbumViewSetTelegram(viewsets.ModelViewSet):
 
     @action(detail=False, methods=["GET", ])
     def to_draft(self, request, *args, **kwargs):
-        albums = self.get_queryset()
+        albums = Album.objects.all()
         for album in albums:
             album.pb_to_df()
         return Response(data={"message": "All music draffed"})
 
     @action(detail=False, methods=["GET", ])
     def to_publish(self, request, *args, **kwargs):
-        albums = self.get_queryset()
+        albums = Album.objects.all()
         for album in albums:
             album.df_to_pb()
         return Response(data={"message": "All music published"})
@@ -244,14 +244,14 @@ class SongViewSetWeb(viewsets.ModelViewSet):
 
     @action(detail=False, methods=["GET", ])
     def to_draft(self, request, *args, **kwargs):
-        songs = self.get_queryset()
+        songs = Song.objects.all()
         for song in songs:
             song.pb_to_df()
         return Response(data={"message": "All music draffed"})
 
     @action(detail=False, methods=["GET", ])
     def to_publish(self, request, *args, **kwargs):
-        songs = self.get_queryset()
+        songs = Song.objects.all()
         for song in songs:
             song.df_to_pb()
         return Response(data={"message": "All music published"})
@@ -293,14 +293,14 @@ class SongViewSetTelegram(viewsets.ModelViewSet):
 
     @action(detail=False, methods=["GET", ])
     def to_draft(self, request, *args, **kwargs):
-        songs = self.get_queryset()
+        songs = Song.objects.all()
         for song in songs:
            song.pb_to_df()
         return Response(data={"message": "All music draffed"})
 
     @action(detail=False, methods=["GET", ])
     def to_publish(self, request, *args, **kwargs):
-        songs = self.get_queryset()
+        songs = Song.objects.all()
         for song in songs:
             song.df_to_pb()
         return Response(data={"message": "All music published"})

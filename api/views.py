@@ -38,6 +38,14 @@ class ArtistViewSetWeb(viewsets.ModelViewSet):
         serializer = ArtistSerializerWeb(artist, many=True)
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
+    @action(detail=False, methods=["GET", ])
+    def all_listen(self, request, *args, **kwargs):
+        artists = self.get_queryset()
+        for artist in artists:
+            artist.seen += 1
+            artist.save()
+        return Response(data={"All artist seen"})
+
 
 class ArtistViewSetTelegram(viewsets.ModelViewSet):
     serializer_class = ArtistSerializerTelegram
@@ -64,6 +72,14 @@ class ArtistViewSetTelegram(viewsets.ModelViewSet):
         artist = self.get_queryset().filter(listen=0)
         serializer = ArtistSerializerTelegram(artist, many=True)
         return Response(data=serializer.data, status=status.HTTP_200_OK)
+
+    @action(detail=False, methods=["GET", ])
+    def all_listen(self, request, *args, **kwargs):
+        artists = self.get_queryset()
+        for artist in artists:
+            artist.seen += 1
+            artist.save()
+        return Response(data={"All artist seen"})
 
 
 class AlbumViewSetWeb(viewsets.ModelViewSet):
@@ -92,6 +108,14 @@ class AlbumViewSetWeb(viewsets.ModelViewSet):
         serializer = AlbumSerializerWeb(album, many=True)
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
+    @action(detail=False, methods=["GET", ])
+    def all_listen(self, request, *args, **kwargs):
+        albums = self.get_queryset()
+        for album in albums:
+            album.seen += 1
+            album.save()
+        return Response(data={"All album seen"})
+
 
 class AlbumViewSetTelegram(viewsets.ModelViewSet):
     serializer_class = AlbumSerializerTelegram
@@ -118,6 +142,14 @@ class AlbumViewSetTelegram(viewsets.ModelViewSet):
         album = self.get_queryset().filter(listen=0)
         serializer = AlbumSerializerTelegram(album, many=True)
         return Response(data=serializer.data, status=status.HTTP_200_OK)
+
+    @action(detail=False, methods=["GET", ])
+    def all_listen(self, request, *args, **kwargs):
+        albums = self.get_queryset()
+        for album in albums:
+            album.seen += 1
+            album.save()
+        return Response(data={"All album seen"})
 
 
 class SongViewSetWeb(viewsets.ModelViewSet):
@@ -146,6 +178,14 @@ class SongViewSetWeb(viewsets.ModelViewSet):
         serializer = SongSerializerTelegram(songs, many=True)
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
+    @action(detail=False, methods=["GET", ])
+    def all_listen(self, request, *args, **kwargs):
+        songs = self.get_queryset()
+        for song in songs:
+            song.listen += 1
+            song.save()
+        return Response(data={"All music listened"})
+
 
 class SongViewSetTelegram(viewsets.ModelViewSet):
     serializer_class = SongSerializerTelegram
@@ -172,6 +212,14 @@ class SongViewSetTelegram(viewsets.ModelViewSet):
         songs = self.get_queryset().filter(listen=0)
         serializer = SongSerializerTelegram(songs, many=True)
         return Response(data=serializer.data, status=status.HTTP_200_OK)
+
+    @action(detail=False, methods=["GET", ])
+    def all_listen(self, request, *args, **kwargs):
+        songs = self.get_queryset()
+        for song in songs:
+            song.listen += 1
+            song.save()
+        return Response(data={"All music listened"})
 
 
 

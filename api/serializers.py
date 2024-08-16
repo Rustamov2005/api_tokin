@@ -21,7 +21,7 @@ class AlbumSerializerWeb(serializers.ModelSerializer):
 class SongSerializerWeb(serializers.ModelSerializer):
     class Meta:
         model = Song
-        fields = ('id', 'title', 'artist', 'description', 'listen')
+        fields = ('id', 'title', 'artist', 'description', 'listen', 'status')
 
 
 class SongsAlbumSerializerWeb(serializers.ModelSerializer):
@@ -40,7 +40,7 @@ class ArtistSerializerTelegram(serializers.ModelSerializer):
 class AlbumSerializerTelegram(serializers.ModelSerializer):
     class Meta:
         model = Album
-        fields = ('title', 'artist', 'seen', 'status')
+        fields = ('title', 'artist', 'seen')
 
 
 class SongSerializerTelegram(serializers.ModelSerializer):

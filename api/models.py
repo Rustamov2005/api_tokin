@@ -42,6 +42,17 @@ class Song(models.Model):
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
     status = models.CharField(max_length=5, choices=StaticChoice.choices, default=StaticChoice.PUBLISH)
 
+    def df_to_pb(self):
+        if self.status == 'df':
+            self.status = 'pb'
+            self.save()
+
+    def pb_to_df(self):
+        if self.status == 'pb':
+            self.status = 'df'
+            self.save()
+
+
 
 class SongsAlbum(models.Model):
     album = models.ForeignKey(Album, on_delete=models.CASCADE)

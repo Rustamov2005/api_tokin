@@ -33,18 +33,32 @@ class ArtistViewSetWeb(viewsets.ModelViewSet):
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
     @action(detail=False, methods=["GET", ])
-    def null_listen(self, request, *args, **kwargs):
+    def null_seen(self, request, *args, **kwargs):
         artist = self.get_queryset().filter(listen=0)
         serializer = ArtistSerializerWeb(artist, many=True)
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
     @action(detail=False, methods=["GET", ])
-    def all_listen(self, request, *args, **kwargs):
+    def all_seen(self, request, *args, **kwargs):
         artists = self.get_queryset()
         for artist in artists:
             artist.seen += 1
             artist.save()
         return Response(data={"All artist seen"})
+
+    @action(detail=False, methods=["GET", ])
+    def to_draft(self, request, *args, **kwargs):
+        artists = self.get_queryset()
+        for artist in artists:
+            artist.pb_to_df()
+        return Response(data={"message": "All music draffed"})
+
+    @action(detail=False, methods=["GET", ])
+    def to_publish(self, request, *args, **kwargs):
+        artists = self.get_queryset()
+        for artist in artists:
+            artist.df_to_pb()
+        return Response(data={"message": "All music published"})
 
 
 class ArtistViewSetTelegram(viewsets.ModelViewSet):
@@ -68,18 +82,32 @@ class ArtistViewSetTelegram(viewsets.ModelViewSet):
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
     @action(detail=False, methods=["GET", ])
-    def null_listen(self, request, *args, **kwargs):
+    def null_seen(self, request, *args, **kwargs):
         artist = self.get_queryset().filter(listen=0)
         serializer = ArtistSerializerTelegram(artist, many=True)
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
     @action(detail=False, methods=["GET", ])
-    def all_listen(self, request, *args, **kwargs):
+    def all_seen(self, request, *args, **kwargs):
         artists = self.get_queryset()
         for artist in artists:
             artist.seen += 1
             artist.save()
         return Response(data={"All artist seen"})
+
+    @action(detail=False, methods=["GET", ])
+    def to_draft(self, request, *args, **kwargs):
+        artists = self.get_queryset()
+        for artist in artists:
+            artist.pb_to_df()
+        return Response(data={"message": "All music draffed"})
+
+    @action(detail=False, methods=["GET", ])
+    def to_publish(self, request, *args, **kwargs):
+        artists = self.get_queryset()
+        for artist in artists:
+            artist.df_to_pb()
+        return Response(data={"message": "All music published"})
 
 
 class AlbumViewSetWeb(viewsets.ModelViewSet):
@@ -103,18 +131,32 @@ class AlbumViewSetWeb(viewsets.ModelViewSet):
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
     @action(detail=False, methods=["GET", ])
-    def null_listen(self, request, *args, **kwargs):
+    def null_seen(self, request, *args, **kwargs):
         album = self.get_queryset().filter(listen=0)
         serializer = AlbumSerializerWeb(album, many=True)
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
     @action(detail=False, methods=["GET", ])
-    def all_listen(self, request, *args, **kwargs):
+    def all_seen(self, request, *args, **kwargs):
         albums = self.get_queryset()
         for album in albums:
             album.seen += 1
             album.save()
         return Response(data={"All album seen"})
+
+    @action(detail=False, methods=["GET", ])
+    def to_draft(self, request, *args, **kwargs):
+        albums = self.get_queryset()
+        for album in albums:
+            album.pb_to_df()
+        return Response(data={"message": "All music draffed"})
+
+    @action(detail=False, methods=["GET", ])
+    def to_publish(self, request, *args, **kwargs):
+        albums = self.get_queryset()
+        for album in albums:
+            album.df_to_pb()
+        return Response(data={"message": "All music published"})
 
 
 class AlbumViewSetTelegram(viewsets.ModelViewSet):
@@ -138,24 +180,38 @@ class AlbumViewSetTelegram(viewsets.ModelViewSet):
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
     @action(detail=False, methods=["GET", ])
-    def null_listen(self, request, *args, **kwargs):
+    def null_seen(self, request, *args, **kwargs):
         album = self.get_queryset().filter(listen=0)
         serializer = AlbumSerializerTelegram(album, many=True)
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
     @action(detail=False, methods=["GET", ])
-    def all_listen(self, request, *args, **kwargs):
+    def all_seen(self, request, *args, **kwargs):
         albums = self.get_queryset()
         for album in albums:
             album.seen += 1
             album.save()
         return Response(data={"All album seen"})
 
+    @action(detail=False, methods=["GET", ])
+    def to_draft(self, request, *args, **kwargs):
+        albums = self.get_queryset()
+        for album in albums:
+            album.pb_to_df()
+        return Response(data={"message": "All music draffed"})
+
+    @action(detail=False, methods=["GET", ])
+    def to_publish(self, request, *args, **kwargs):
+        albums = self.get_queryset()
+        for album in albums:
+            album.df_to_pb()
+        return Response(data={"message": "All music published"})
+
 
 class SongViewSetWeb(viewsets.ModelViewSet):
     serializer_class = SongSerializerWeb
-    permission_classes = [IsAuthenticated]
-    authentication_classes = [TokenAuthentication]
+    # permission_classes = [IsAuthenticated]
+    # authentication_classes = [TokenAuthentication]
     def get_queryset(self):
         return Song.objects.filter(status='pb')
 
@@ -185,6 +241,20 @@ class SongViewSetWeb(viewsets.ModelViewSet):
             song.listen += 1
             song.save()
         return Response(data={"All music listened"})
+
+    @action(detail=False, methods=["GET", ])
+    def to_draft(self, request, *args, **kwargs):
+        songs = self.get_queryset()
+        for song in songs:
+            song.pb_to_df()
+        return Response(data={"message": "All music draffed"})
+
+    @action(detail=False, methods=["GET", ])
+    def to_publish(self, request, *args, **kwargs):
+        songs = self.get_queryset()
+        for song in songs:
+            song.df_to_pb()
+        return Response(data={"message": "All music published"})
 
 
 class SongViewSetTelegram(viewsets.ModelViewSet):
@@ -220,6 +290,20 @@ class SongViewSetTelegram(viewsets.ModelViewSet):
             song.listen += 1
             song.save()
         return Response(data={"All music listened"})
+
+    @action(detail=False, methods=["GET", ])
+    def to_draft(self, request, *args, **kwargs):
+        songs = self.get_queryset()
+        for song in songs:
+           song.pb_to_df()
+        return Response(data={"message": "All music draffed"})
+
+    @action(detail=False, methods=["GET", ])
+    def to_publish(self, request, *args, **kwargs):
+        songs = self.get_queryset()
+        for song in songs:
+            song.df_to_pb()
+        return Response(data={"message": "All music published"})
 
 
 

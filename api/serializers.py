@@ -40,13 +40,13 @@ class ArtistSerializerTelegram(serializers.ModelSerializer):
 class AlbumSerializerTelegram(serializers.ModelSerializer):
     class Meta:
         model = Album
-        fields = ('title', 'artist', 'seen')
+        fields = ('title', 'artist', 'seen', 'status')
 
 
 class SongSerializerTelegram(serializers.ModelSerializer):
     class Meta:
         model = Song
-        fields = ('title', 'artist', 'description', 'listen')
+        fields = ('title', 'artist', 'description', 'listen', 'status')
 
 
 # class TokenCheck(serializers.Serializer):

@@ -2,6 +2,11 @@ from django.db import models
 from .helpers import SaveMediaFiles
 
 
+class StaticChoice(models.TextChoices):
+    DRAFT = 'df', 'Draft'
+    PUBLISH = 'pb', 'Publish'
+
+
 class Artist(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
@@ -35,6 +40,7 @@ class Song(models.Model):
     description = models.TextField()
     listen = models.PositiveBigIntegerField(default=0)
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
+    status = models.CharField(max_length=5, choices=StaticChoice.choices, default=StaticChoice.PUBLISH)
 
 
 class SongsAlbum(models.Model):

@@ -157,7 +157,7 @@ class SongViewSetWeb(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     authentication_classes = [TokenAuthentication]
     def get_queryset(self):
-        return Song.objects.all()
+        return Song.objects.filter(status='pb')
 
     @action(detail=True, methods=["GET", ])
     def listen(self, request, *args, **kwargs):
@@ -192,7 +192,7 @@ class SongViewSetTelegram(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     authentication_classes = [TokenAuthentication]
     def get_queryset(self):
-        return Song.objects.all()
+        return Song.objects.filter(status='pb')
 
     @action(detail=True, methods=["GET", ])
     def listen(self, request, *args, **kwargs):

@@ -60,6 +60,18 @@ class ArtistViewSetWeb(viewsets.ModelViewSet):
             artist.df_to_pb()
         return Response(data={"message": "All music published"})
 
+    @action(detail=False, methods=["GET", ])
+    def to_publish_d(self, request, *args, **kwargs):
+        artist = self.get_object()
+        artist.df_to_pb()
+        return Response(data={"message": "data change to publish "})
+
+    @action(detail=False, methods=["GET", ])
+    def to_draf_p(self, request, *args, **kwargs):
+        artist = self.get_object()
+        artist.pb_to_df()
+        return Response(data={"message": "data change to draf "})
+
 
 class ArtistViewSetTelegram(viewsets.ModelViewSet):
     serializer_class = ArtistSerializerTelegram
@@ -108,6 +120,18 @@ class ArtistViewSetTelegram(viewsets.ModelViewSet):
         for artist in artists:
             artist.df_to_pb()
         return Response(data={"message": "All music published"})
+
+    @action(detail=False, methods=["GET", ])
+    def to_publish_d(self, request, *args, **kwargs):
+        artist = self.get_object()
+        artist.df_to_pb()
+        return Response(data={"message": "data change to publish "})
+
+    @action(detail=False, methods=["GET", ])
+    def to_draf_p(self, request, *args, **kwargs):
+        artist = self.get_object()
+        artist.pb_to_df()
+        return Response(data={"message": "data change to draf "})
 
 
 class AlbumViewSetWeb(viewsets.ModelViewSet):
@@ -158,6 +182,18 @@ class AlbumViewSetWeb(viewsets.ModelViewSet):
             album.df_to_pb()
         return Response(data={"message": "All music published"})
 
+    @action(detail=False, methods=["GET", ])
+    def to_publish_d(self, request, *args, **kwargs):
+        album = self.get_object()
+        album.df_to_pb()
+        return Response(data={"message": "data change to publish "})
+
+    @action(detail=False, methods=["GET", ])
+    def to_draf_p(self, request, *args, **kwargs):
+        album = self.get_object()
+        album.pb_to_df()
+        return Response(data={"message": "data change to draf "})
+
 
 class AlbumViewSetTelegram(viewsets.ModelViewSet):
     serializer_class = AlbumSerializerTelegram
@@ -206,6 +242,18 @@ class AlbumViewSetTelegram(viewsets.ModelViewSet):
         for album in albums:
             album.df_to_pb()
         return Response(data={"message": "All music published"})
+
+    @action(detail=False, methods=["GET", ])
+    def to_publish_d(self, request, *args, **kwargs):
+        album = self.get_object()
+        album.df_to_pb()
+        return Response(data={"message": "data change to publish "})
+
+    @action(detail=False, methods=["GET", ])
+    def to_draf_p(self, request, *args, **kwargs):
+        album = self.get_object()
+        album.pb_to_df()
+        return Response(data={"message": "data change to draf "})
 
 
 class SongViewSetWeb(viewsets.ModelViewSet):
@@ -256,6 +304,18 @@ class SongViewSetWeb(viewsets.ModelViewSet):
             song.df_to_pb()
         return Response(data={"message": "All music published"})
 
+    @action(detail=False, methods=["GET", ])
+    def to_publish_d(self, request, *args, **kwargs):
+        song = self.get_object()
+        song.df_to_pb()
+        return Response(data={"message": "data change to publish "})
+
+    @action(detail=False, methods=["GET", ])
+    def to_draf_p(self, request, *args, **kwargs):
+        song = self.get_object()
+        song.pb_to_df()
+        return Response(data={"message": "data change to draf "})
+
 
 class SongViewSetTelegram(viewsets.ModelViewSet):
     serializer_class = SongSerializerTelegram
@@ -304,6 +364,18 @@ class SongViewSetTelegram(viewsets.ModelViewSet):
         for song in songs:
             song.df_to_pb()
         return Response(data={"message": "All music published"})
+
+    @action(detail=False, methods=["GET", ])
+    def to_publish_d(self, request, *args, **kwargs):
+        song = self.get_object()
+        song.df_to_pb()
+        return Response(data={"message": "data change to publish "})
+
+    @action(detail=False, methods=["GET", ])
+    def to_draf_p(self, request, *args, **kwargs):
+        song = self.get_object()
+        song.pb_to_df()
+        return Response(data={"message": "data change to draf "})
 
 
 

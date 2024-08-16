@@ -18,6 +18,13 @@ class ArtistViewSetWeb(viewsets.ModelViewSet):
     def get_queryset(self):
         return Artist.objects.all()
 
+    @action(detail=True, methods=["GET", ])
+    def seen(self, request, *args, **kwargs):
+        artist = self.get_object()
+        artist.seen += 1
+        artist.save()
+        return Response(data=artist.listen)
+
 
 class ArtistViewSetTelegram(viewsets.ModelViewSet):
     serializer_class = ArtistSerializerTelegram
@@ -25,6 +32,13 @@ class ArtistViewSetTelegram(viewsets.ModelViewSet):
     authentication_classes = [TokenAuthentication]
     def get_queryset(self):
         return Artist.objects.all()
+
+    @action(detail=True, methods=["GET", ])
+    def seen(self, request, *args, **kwargs):
+        artist = self.get_object()
+        artist.seen += 1
+        artist.save()
+        return Response(data=artist.listen)
 
 
 class AlbumViewSetWeb(viewsets.ModelViewSet):
@@ -34,6 +48,13 @@ class AlbumViewSetWeb(viewsets.ModelViewSet):
     def get_queryset(self):
         return Album.objects.all()
 
+    @action(detail=True, methods=["GET", ])
+    def seen(self, request, *args, **kwargs):
+        album = self.get_object()
+        album.seen += 1
+        album.save()
+        return Response(data=album.listen)
+
 
 class AlbumViewSetTelegram(viewsets.ModelViewSet):
     serializer_class = AlbumSerializerTelegram
@@ -41,6 +62,13 @@ class AlbumViewSetTelegram(viewsets.ModelViewSet):
     authentication_classes = [TokenAuthentication]
     def get_queryset(self):
         return Album.objects.all()
+
+    @action(detail=True, methods=["GET", ])
+    def seen(self, request, *args, **kwargs):
+        album = self.get_object()
+        album.seen += 1
+        album.save()
+        return Response(data=album.listen)
 
 
 class SongViewSetWeb(viewsets.ModelViewSet):

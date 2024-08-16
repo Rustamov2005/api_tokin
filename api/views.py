@@ -50,6 +50,13 @@ class SongViewSetWeb(viewsets.ModelViewSet):
     def get_queryset(self):
         return Song.objects.all()
 
+    @action(detail=True, methods=["GET", ])
+    def listen(self, request, *args, **kwargs):
+        song = self.get_object()
+        song.listen += 1
+        song.save()
+        return Response(data=song.listen)
+
 
 class SongViewSetTelegram(viewsets.ModelViewSet):
     serializer_class = SongSerializerTelegram
@@ -57,6 +64,13 @@ class SongViewSetTelegram(viewsets.ModelViewSet):
     authentication_classes = [TokenAuthentication]
     def get_queryset(self):
         return Song.objects.all()
+
+    @action(detail=True, methods=["GET", ])
+    def listen(self, request, *args, **kwargs):
+        song = self.get_object()
+        song.listen += 1
+        song.save()
+        return Response(data=song.listen)
 
 
 class SongsAlbumViewSetWeb(viewsets.ModelViewSet):
@@ -66,12 +80,7 @@ class SongsAlbumViewSetWeb(viewsets.ModelViewSet):
     def get_queryset(self):
         return SongsAlbum.objects.all()
 
-    @action(detail=True, methods=["GET", ])
-    def listen(self, request, *args, **kwargs):
-        song = self.get_object()
-        song.listen += 1
-        song.save()
-        return Response(data=song.listen)
+
 
 class TokenCkeck(APIView):
     def get(self, request):
